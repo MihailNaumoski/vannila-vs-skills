@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Waitlist {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  source    String?  // UTM source parameter
+  referrer  String?  // Full referrer URL
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@index([source])
+  @@index([createdAt])
+  @@map("waitlist")
+}
